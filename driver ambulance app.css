@@ -1,0 +1,434 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+
+        /* Style untuk Notifikasi */
+        .notification {
+            position: fixed;
+            top: -100px; /* Mulai dari luar layar */
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            border-radius: 8px;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: top 0.5s ease-in-out;
+            text-align: center;
+        }
+
+        .notification.show {
+            top: 20px; /* Muncul ke dalam layar */
+        }
+
+        .notification.error {
+            background-color: #f44336; /* Merah untuk error */
+        }
+
+        .mission-card {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+            overflow: hidden; /* Penting untuk border-radius */
+        }
+        .mission-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .mission-header h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .mission-toggle-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+        .mission-header.active .mission-toggle-icon {
+            transform: rotate(180deg);
+        }
+        .mission-summary {
+            padding: 15px 20px;
+        }
+        .summary-item {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .summary-item strong {
+            color: #555;
+        }
+        .mission-full-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background-color: #f8f9fa;
+        }
+        .mission-full-details .details-content {
+             padding: 15px 20px;
+             border-top: 1px solid #e9ecef;
+        }
+        .detail-item {
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .detail-item strong {
+             display: block;
+             color: #333;
+             margin-bottom: 4px;
+        }
+        /* Tambahkan ini di bagian mana saja dalam file driver ambulance app.css Anda */
+
+        /* Secara paksa menyembunyikan kontainer petunjuk arah 
+        yang dibuat oleh Leaflet Routing Machine.
+        !important digunakan untuk memastikan aturan ini tidak bisa
+        ditimpa oleh aturan lain.
+        */
+        /* .leaflet-routing-container {
+            display: none !important;
+        } */
+
+        .status-card.completed {
+            background-color: #e8f5e9; /* Latar hijau muda */
+            border-color: #4CAF50;
+        }
+        .status-card.completed .status-icon {
+            transform: scale(1.1);
+        }
+
+        .trip-summary-section {
+            background-color: #e3f2fd;
+            border: 1px solid #90caf9;
+            color: #1e3a8a;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+        }
+        .trip-summary-item {
+            flex: 1;
+        }
+        .trip-summary-item .value {
+            font-size: 22px;
+            font-weight: 700;
+            display: block;
+        }
+        .trip-summary-item .label {
+            font-size: 12px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Tata letak responsif */
+            gap: 10px;
+        }
+
+
+
+        .app-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .app-header h1 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .app-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation: pulse 2s infinite;
+        }
+
+        .app-content {
+            padding: 20px;
+        }
+
+        .mission-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196F3;
+        }
+
+        .mission-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mission-details {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .location-section {
+            margin-bottom: 20px;
+        }
+
+        .location-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .location-title {
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .location-accuracy {
+            font-size: 12px;
+            color: #4CAF50;
+            background: #e8f5e8;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        .coordinates {
+            background: #f1f3f4;
+            padding: 12px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .location-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .btn {
+            border: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-section {
+            margin-bottom: 20px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .status-card {
+            background: white;
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .status-card.active {
+            border-color: #2196F3;
+            background: #e3f2fd;
+        }
+
+        .status-card:hover {
+            border-color: #2196F3;
+        }
+
+        .status-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .status-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-panel {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .auto-tracking {
+            background: #e8f5e8;
+            border: 2px solid #4CAF50;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .auto-tracking.active {
+            animation: pulse 2s infinite;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 1000;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .offline-indicator {
+            background: #ff9800;
+            color: white;
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+            display: none;
+        }

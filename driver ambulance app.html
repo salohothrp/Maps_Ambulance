@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Ambulance - Rumah Aspirasi</title>
+    <link rel="stylesheet" href="driver ambulance app.css">
+    <link rel="shortcut icon" href="RUMAH ASPIRASI.png" type="image/x-icon">
+
+    <!-- Pustaka CSS untuk Peta & Pencarian -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.css" />
+    <!-- Pustaka JS untuk Peta & Pencarian -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-geosearch@3.11.0/dist/geosearch.umd.js"></script>
+    
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    
+</head>
+<body>
+    <div class="notification" id="notification"></div>
+    <div class="offline-indicator" id="offlineIndicator">📶 Mode Offline</div>
+
+    <div class="app-container">
+        <div class="app-header">
+            <div class="status-indicator" id="connectionStatus"></div>
+            <h1>🚑 Driver App</h1>
+        </div>
+
+        <div class="map-container" id="driverMap" style="height: 350px;"></div>
+
+        <div class="app-content">
+            <div class="mission-card">
+                <div class="mission-header" onclick="toggleMissionDetails()">
+                    <h3>📋 Misi Saat Ini</h3>
+                    <div class="mission-toggle-icon">▼</div>
+                </div>
+                <div id="missionContent">
+                    <div class="mission-summary"><p>Memuat data misi...</p></div>
+                </div>
+            </div>
+
+            <div class="trip-summary-section" id="tripSummary" style="display: none;">
+                <div class="trip-summary-item">
+                    <span class="value" id="tripTime">--</span>
+                    <span class="label">🕒 Estimasi</span>
+                </div>
+                <div class="trip-summary-item">
+                    <span class="value" id="tripDistance">--</span>
+                    <span class="label">🛣️ Jarak</span>
+                </div>
+            </div>
+
+            <div class="location-section">
+                <div class="location-header">
+                    <div class="location-title">📍 Lokasi Saya</div>
+                    <div class="location-accuracy" id="accuracy">GPS: --m</div>
+                </div>
+                <div class="coordinates" id="coordinates">
+                    Lat: <span id="currentLat">--</span> | Lng: <span id="currentLng">--</span>
+                </div>
+            </div>
+
+            <div class="status-section">
+                 <div class="location-title" style="margin-bottom: 15px;">🚦 Status Perjalanan</div>
+                 <div class="status-grid">
+                    <div class="status-card active" data-status="1" onclick="selectStatus(1)"><div class="status-icon">🚗</div><div class="status-text">Menuju Jemput</div></div>
+                    <div class="status-card" data-status="2" onclick="selectStatus(2)"><div class="status-icon">📍</div><div class="status-text">Tiba di Lokasi</div></div>
+                    <div class="status-card" data-status="3" onclick="selectStatus(3)"><div class="status-icon">🏥</div><div class="status-text">Ke Tujuan</div></div>
+                    <div class="status-card" data-status="4" onclick="selectStatus(4)"><div class="status-icon">✅</div><div class="status-text">Selesai</div></div>
+                 </div>
+            </div>
+
+            <div class="quick-actions">
+                <button class="btn btn-primary" onclick="startSimulation()" id="simBtn">▶️ Mulai Simulasi</button>
+                <button class="btn btn-warning" onclick="sendEmergency()">🚨 Emergency</button>
+                <button class="btn btn-danger" onclick="endTrip()">🛑 End Trip</button>
+            </div>
+        </div>
+    </div>
+    <script src="driver ambulance app.js"></script>
+</body>
+</html>
